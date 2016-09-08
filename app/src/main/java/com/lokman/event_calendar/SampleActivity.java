@@ -3,6 +3,7 @@ package com.lokman.event_calendar;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,6 +12,7 @@ import com.lokman.event_calendar.utility.DateFormatter;
 import com.lokman.event_calendar.view.CalenderMonthView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class SampleActivity extends Activity {
 
         final CalenderMonthView mCalenderMonthView = (CalenderMonthView)findViewById(R.id.calendar_view);
 //        mCalenderMonthView.setCurrent();
-
+//        mCalenderMonthView.setMonthCellHeight(500);
         ((Button)findViewById(R.id.next)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +42,12 @@ public class SampleActivity extends Activity {
 
             }
         });
-
+        mCalenderMonthView.setOnMonthCellSelectListener(new CalenderMonthView.OnMonthCellSelectListener() {
+            @Override
+            public void selectedCell(Date date) {
+                Log.e("date",date.toString());
+            }
+        });
 
         //dump data
         HashMap<String,List<CEvent>> mCEventMap = new HashMap<String,List<CEvent>>();

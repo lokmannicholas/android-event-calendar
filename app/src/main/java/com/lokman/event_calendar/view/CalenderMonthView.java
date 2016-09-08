@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import com.lokman.event_calendar.R;
 import com.lokman.event_calendar.model.CEvent;
 import com.lokman.event_calendar.utility.DateFormatter;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,7 +39,9 @@ public class CalenderMonthView extends RelativeLayout {
         void selectedCell(Date date);
     }
 
-    private OnMonthCellSelectListener mOnMonthCellSelectListener;
+    private int monthCellHeight = 200;
+    private int eventTitleSize = 10;
+    private static final int  NO_OF_EVENT_DISPLAY = 3;
     private LayoutInflater mInflater;
     private GridView gridView;
     private List<String> monthList;
@@ -47,7 +52,7 @@ public class CalenderMonthView extends RelativeLayout {
     private Date startDate,calendarStartDay;
     private Date endDate,calendarEndDay;
     private Date today;
-    private int weekday;
+    private int weekday,num_of_row;
     private Calendar mCalendar = Calendar.getInstance();
 
     public CalenderMonthView(Context context) {
@@ -85,7 +90,8 @@ public class CalenderMonthView extends RelativeLayout {
         txt_title = (TextView) findViewById(R.id.txt_title);
         gridView = (GridView) findViewById(R.id.month_view);
 
-         Calendar calendar = Calendar.getInstance();
+
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR,0);
         calendar.set(Calendar.MINUTE,0);
         calendar.set(Calendar.SECOND,0);
@@ -97,7 +103,7 @@ public class CalenderMonthView extends RelativeLayout {
         this.calendarStartDay = calendar.getTime();
         mCalendar = calendar;
 
-        calendar.add(Calendar.MONTH,4);
+        calendar.add(Calendar.MONTH, 4);
         calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
         this.calendarEndDay = calendar.getTime();
 
@@ -113,7 +119,7 @@ public class CalenderMonthView extends RelativeLayout {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                mOnMonthCellSelectListener.selectedCell(((MonthCellView)v.getTag(R.layout.week_cell)).dateOfMonth);
+                mOnMonthCellSelectListener.selectedCell(((MonthCellView)v.getTag()).dateOfMonth);
 
             }
         });
@@ -144,21 +150,33 @@ public class CalenderMonthView extends RelativeLayout {
         mCalendar = calendar;
         mMonthCellAdapter =new MonthCellAdapter(numDays);
         gridView.setAdapter(mMonthCellAdapter);
-        mMonthCellAdapter.notifyDataSetChanged();
+
         txt_title.setText(String.format(getResources().getConfiguration().locale, "%tB", calendar) + year);
+        num_of_row = (int)((numDays + weekday)%7 ==0 ? Math.round((numDays + weekday) / 7 ):Math.round((numDays + weekday) / 7 +0.5));
+//        MonthCellHeight =
+        gridView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (txt_title.getHeight() + 50 + num_of_row * monthCellHeight)));
+        mMonthCellAdapter.notifyDataSetChanged();
+    }
+    public void setMonthCellHeight(int height){
+        this.monthCellHeight = height;
+        gridView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (txt_title.getHeight() + 50 + num_of_row * monthCellHeight)));
 
-
+        mMonthCellAdapter.notifyDataSetChanged();
     }
     public void loadLastMonth(){
-        //monthList.clear();
-        if(startDate.getTime() > calendarStartDay.getTime() && calendarEndDay.getTime() >= endDate.getTime()) {
+        //reach minimum
+        if(startDate.getTime() <= calendarStartDay.getTime()){
+            //do smth
+        }else {
             mCalendar.add(Calendar.MONTH, -1);
             this.setMonth(mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.YEAR));
         }
     }
     public void loadNextMonth(){
-       // monthList.clear();
-        if(startDate.getTime() >= calendarStartDay.getTime() && calendarEndDay.getTime() > endDate.getTime()) {
+        // reach maximum
+        if(endDate.getTime() >= calendarEndDay.getTime()){
+            //do smth
+        }else {
             mCalendar.add(Calendar.MONTH, 1);
             this.setMonth(mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.YEAR));
         }
@@ -198,7 +216,9 @@ public class CalenderMonthView extends RelativeLayout {
     }
 
     public Date getCurrentDay(){return this.today;}
-
+    public void setEventTitleSize(int size){
+        eventTitleSize = size;
+    }
 
     /******** MonthCellAdapter ********/
     protected class MonthCellAdapter extends BaseAdapter {
@@ -215,53 +235,54 @@ public class CalenderMonthView extends RelativeLayout {
 
             MonthCellView viewHolder;
 
-            if (convertView == null) {
+            if (convertView == null ) {
                 viewHolder = new MonthCellView();
                 if(position>=7) {
-                    convertView = mInflater.inflate(R.layout.month_cell, parent, false);
+                    convertView = inflater.inflate(R.layout.month_cell, null);
                     viewHolder.txt_monthday=(TextView) convertView.findViewById(R.id.txt_monthday);
                     viewHolder.ll_dayEvent=(LinearLayout) convertView.findViewById(R.id.ll_dayEvent);
-                    convertView.setTag(R.layout.month_cell,viewHolder);
+                    convertView.setTag(viewHolder);
                 }else{
-                    convertView = mInflater.inflate(R.layout.week_cell,  parent, false);
+                    convertView = inflater.inflate(R.layout.week_cell,  parent, false);
                     viewHolder.txt_weekday = (TextView) convertView.findViewById(R.id.txt_weekday);
-                    convertView.setTag(R.layout.week_cell,viewHolder);
+                    convertView.setTag(viewHolder);
                 }
 
             } else {
                 if(position>=7) {
-                    viewHolder = (MonthCellView) convertView.getTag(R.layout.month_cell);
+                    viewHolder = (MonthCellView) convertView.getTag();
                 }else{
-                    viewHolder = (MonthCellView) convertView.getTag(R.layout.week_cell);
+                    viewHolder = (MonthCellView) convertView.getTag();
                 }
             }
             if(position>=7) {
                 if(position<7+weekday){
-                    viewHolder.txt_monthday.setText("");
-                    convertView.setClickable(true);
+                    //viewHolder.txt_monthday.setText("");
+                    convertView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 50));
                 }else{
 
                     viewHolder.txt_monthday.setText(monthList.get(position - (7 + weekday)));
-                    viewHolder.dateOfMonth.setTime(startDate.getTime() + (position - (7 + weekday)) * 24 * 60 * 60 * 1000);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(startDate);
+                    calendar.add(Calendar.DAY_OF_YEAR,position - (7 + weekday));
+                    viewHolder.dateOfMonth=calendar.getTime();
                     if(mCEventMap.get(DateFormatter.date_month_year.format(viewHolder.dateOfMonth.getTime()))!=null){
 //                        viewHolder.txt_monthday.setTextColor(getResources().getColor(R.color.colorPrimary));
                         List<CEvent> cEventList = mCEventMap.get(DateFormatter.date_month_year.format(viewHolder.dateOfMonth.getTime()));
-                        for(int i=0;i<cEventList.size();i++){
-                            CEvent mCEvent = cEventList.get(i);
-                            TextView event_title = new TextView(context);
-                            event_title.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            event_title.setText(mCEvent.getTitle());
-                            event_title.setBackgroundColor(mCEvent.getColor());
-                            viewHolder.ll_dayEvent.addView(event_title);
+                        for(int i=0;i<(cEventList.size()<NO_OF_EVENT_DISPLAY?cEventList.size():NO_OF_EVENT_DISPLAY);i++){
+                             viewHolder.ll_dayEvent.addView(getEventBar(cEventList.get(i)));
                         }
                     }
                     if(DateFormatter.date_month_year.format(viewHolder.dateOfMonth.getTime()).equals(DateFormatter.date_month_year.format(today.getTime()))){
                         viewHolder.txt_monthday.setTextColor(getResources().getColor(R.color.colorAccent));
                     }
-                    convertView.setClickable(true);
+
+                    convertView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, monthCellHeight));
+
+
                 }
             }else{
-
+                convertView.setClickable(false);
                 switch(position){
                     case 0:
 
@@ -288,10 +309,16 @@ public class CalenderMonthView extends RelativeLayout {
                 }
             }
 
-
             return convertView;
         }
-
+        public TextView getEventBar(CEvent mCEvent){
+            TextView event_title = new TextView(context);
+            event_title.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            event_title.setText(mCEvent.getTitle());
+            event_title.setTextSize(eventTitleSize);
+            event_title.setBackgroundColor(mCEvent.getColor());
+            return event_title;
+        }
         @Override
         public int getCount() {
             return max_day_of_mth+7+weekday;

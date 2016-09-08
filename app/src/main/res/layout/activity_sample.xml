@@ -13,7 +13,7 @@
     <com.lokman.event_calendar.view.CalenderMonthView
         android:id="@+id/calendar_view"
         android:layout_width="wrap_content"
-        android:layout_height="500dp" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:orientation="horizontal"
