@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
-    android:layout_height="50dp">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/txt_monthday"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:textSize="12dp" />
-
-    <LinearLayout
-        android:id="@+id/ll_dayEvent"
-        android:orientation="vertical"
+    android:layout_height="50dp"
+>
+    <RelativeLayout
+        android:id="@+id/rl_cell"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txt_monthday">
+        >
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_monthday"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="12dp"
+            android:paddingLeft="3dp" />
 
+        <LinearLayout
+            android:id="@+id/ll_dayEvent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txt_monthday"
+            >
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

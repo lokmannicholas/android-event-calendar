@@ -23,8 +23,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_title"
         android:numColumns="7"
-        android:verticalSpacing="1dp"
-        android:horizontalSpacing="1dp"
+
         android:choiceMode="singleChoice"
         android:clickable="true"
     >

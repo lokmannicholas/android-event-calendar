@@ -24,9 +24,9 @@ public class SampleActivity extends Activity {
         setContentView(R.layout.activity_sample);
 
         final CalenderMonthView mCalenderMonthView = (CalenderMonthView)findViewById(R.id.calendar_view);
-
+        mCalenderMonthView.setCellBorder(1);
 //        mCalenderMonthView.setCurrent();
-        mCalenderMonthView.setMonthCellHeight(300);
+//        mCalenderMonthView.setMonthCellHeight(300);
         //mCalenderMonthView.reLoad();
 //        mCalenderMonthView.resize();
         ((Button)findViewById(R.id.next)).setOnClickListener(new View.OnClickListener() {
@@ -57,7 +57,7 @@ public class SampleActivity extends Activity {
         String key = DateFormatter.date_month_year.format(mCalenderMonthView.getCurrentDay().getTime() + 5 * 24 * 60 * 60 * 1000);
         List<CEvent> CEventList = new ArrayList<CEvent>();
         CEvent mCEvent = new CEvent();
-        mCEvent.setTitle("test");
+        mCEvent.setTitle("testfufkuxsdghjhgfdfdghjfdssgdfghgfdsdfghgfdsdfghgfdsdfgh");
         mCEvent.setColor("E5E5E5");
         CEventList.add(mCEvent);
         mCEventMap.put(key,CEventList);
