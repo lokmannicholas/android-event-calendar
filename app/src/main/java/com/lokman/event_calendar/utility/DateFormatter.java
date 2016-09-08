@@ -7,5 +7,7 @@ import java.text.SimpleDateFormat;
  */
 public class DateFormatter {
     public static SimpleDateFormat date_month_year = new SimpleDateFormat("dd-MMM-yyyy");
+    public static SimpleDateFormat date_only = new SimpleDateFormat("dd");
+
 
 }

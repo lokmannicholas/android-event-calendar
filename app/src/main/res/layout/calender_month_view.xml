@@ -1,39 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:orientation="vertical"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="30dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="@string/app_name"
-                android:id="@+id/txt_title"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
-
-        <GridView
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/month_view"
-            android:numColumns="7"
-            android:verticalSpacing="1dp"
-            android:horizontalSpacing="1dp"
-            android:choiceMode="singleChoice"
-            android:clickable="true"
-            android:scrollingCache="true">
-
-        </GridView>
-
-    </LinearLayout>
-
+            android:textAlignment="center"
+            android:text="@string/app_name"
+            android:id="@+id/txt_title"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <GridView
+        android:id="@+id/month_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title"
+        android:numColumns="7"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:choiceMode="singleChoice"
+        android:clickable="true"
+    >
+    </GridView>
 </RelativeLayout>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAlignment="center"-->
+                <!--android:text="@string/app_name"-->
+                <!--android:id="@+id/txt_title"-->
+                <!--android:layout_centerInParent="true" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<GridView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/month_view"-->
+            <!--android:numColumns="7"-->
+            <!--android:verticalSpacing="1dp"-->
+            <!--android:horizontalSpacing="1dp"-->
+            <!--android:choiceMode="singleChoice"-->
+            <!--android:clickable="true"-->
+            <!--android:scrollingCache="true">-->
+
+        <!--</GridView>-->
+
+    <!--</LinearLayout>-->
+
+<!--</RelativeLayout>-->
