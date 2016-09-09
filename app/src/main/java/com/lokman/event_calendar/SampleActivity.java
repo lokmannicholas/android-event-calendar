@@ -2,10 +2,13 @@ package com.lokman.event_calendar;
 
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.lokman.event_calendar.model.CEvent;
 import com.lokman.event_calendar.utility.DateFormatter;
@@ -15,6 +18,7 @@ import com.lokman.event_calendar.model.MonthCell;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class SampleActivity extends Activity {
 
@@ -45,6 +49,26 @@ public class SampleActivity extends Activity {
 
             }
         });
+
+        final Spinner mSpinner = (Spinner)findViewById(R.id.spinner);
+        String[] mItems = new String[]{"en","zh","ko","ru","fr","it","ja"};
+        ArrayAdapter<String> _Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mItems);
+
+        mSpinner.setAdapter(_Adapter);
+        ((Button) findViewById(R.id.lang)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Locale locale = new Locale(mSpinner.getSelectedItem().toString());
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                getBaseContext().getResources().updateConfiguration(config,
+                        getBaseContext().getResources().getDisplayMetrics());
+                mCalenderMonthView.reload();
+
+            }
+        });
         mCalenderMonthView.setOnMonthCellSelectListener(new CalenderMonthView.OnMonthCellSelectListener() {
             @Override
             public void selectedCell(MonthCell mMonthCell) {
@@ -60,8 +84,10 @@ public class SampleActivity extends Activity {
         mCEvent.setTitle("testfufkuxsdghjhgfdfdghjfdssgdfghgfdsdfghgfdsdfghgfdsdfgh");
         mCEvent.setColor("E5E5E5");
         CEventList.add(mCEvent);
-        mCEventMap.put(key,CEventList);
+        mCEventMap.put(key, CEventList);
 
         mCalenderMonthView.setEvent(mCEventMap);
+
+
     }
 }

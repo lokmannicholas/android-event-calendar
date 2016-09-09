@@ -1,0 +1,42 @@
+{
+  "public holiday": {
+    "en": {
+      "1-1-2016": "The first day of January",
+      "2-2-2016": "Lunar New Year’s Day",
+      "9-2-2016": "The second day of Lunar New Year",
+      "10-2-2016": "The third day of Lunar New Year",
+      "25-3-2016": "Holy Friday",
+      "26-3-2016": "The day following Holy Friday",
+      "28-3-2016": "Easter",
+      "4-4-2016": "Ching Ming Festival",
+      "2-5-2016": "The day following the Labour Day",
+      "14-5-2016": "The Birthday of the Buddha",
+      "9-6-2016": "Tuen Ng Festival",
+      "1-7-2016": "Hong Kong Special Administrative Region Establishment Day",
+      "16-9-2016": "The day following the Chinese Mid-Autumn Festival",
+      "1-10-2016": "National Day",
+      "10-10-2016": "The day following the Chung Yeung Festival",
+      "26-12-2016": "The first weekday after Christmas Day",
+      "27-12-2016": "The second weekday after Christmas Day"
+    },
+    "zh": {
+      "1-1-2016": "元旦日",
+      "2-2-2016": "農曆年初一",
+      "9-2-2016": "農曆年初二",
+      "10-2-2016": "農曆年初三",
+      "25-3-2016": "耶穌受難日",
+      "26-3-2016": "耶穌受難節翌日",
+      "28-3-2016": "復活節",
+      "4-4-2016": "清明節",
+      "2-5-2016": "勞動節翌日",
+      "14-5-2016": "佛誕",
+      "9-6-2016": "端午節",
+      "1-7-2016": "香港特別行政區成立紀念日",
+      "16-9-2016": "中秋節翌日",
+      "1-10-2016": "國慶日",
+      "10-10-2016": "重陽節翌日",
+      "26-12-2016": "聖誕節翌日",
+      "27-12-2016": "聖誕節後翌日"
+    }
+  }
+}
