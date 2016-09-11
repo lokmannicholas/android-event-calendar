@@ -1,6 +1,7 @@
 package com.lokman.event_calendar.model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -50,6 +51,8 @@ public class SpecialDate {
                 String value = holiday_of_local.getString(key);
                 CEvent mCEvent = new CEvent();
                 mCEvent.setTitle(value);
+                mCEvent.setColor(Color.RED);
+                mCEvent.setTitleColor(Color.WHITE);
                 List<CEvent> ceventList = new ArrayList<CEvent>();
                 ceventList.add(mCEvent);
                 this.mCEventMap.put(key, ceventList);

@@ -290,7 +290,7 @@ public class CalenderMonthView extends RelativeLayout {
         }
 
         for(int i =0;i<monthCellList.size() ; i++){
-            Log.e("monthCellList",monthCellList.get(i).getDateString());
+            //Log.e("monthCellList",monthCellList.get(i).getDateString());
             if(mCEvent.get(monthCellList.get(i).getDateString())!=null){
 
                 monthCellList.get(i).setEvents(mCEvent.get(monthCellList.get(i).getDateString()));
@@ -451,6 +451,7 @@ public class CalenderMonthView extends RelativeLayout {
             event_title.setText(mCEvent.getTitle());
             event_title.setTextSize(eventTitleSize);
             event_title.setMaxLines(1);
+            event_title.setTextColor(mCEvent.getTitleColor());
             event_title.setBackgroundColor(mCEvent.getColor());
             return event_title;
         }

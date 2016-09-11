@@ -72,7 +72,14 @@ public class SampleActivity extends Activity {
         mCalenderMonthView.setOnMonthCellSelectListener(new CalenderMonthView.OnMonthCellSelectListener() {
             @Override
             public void selectedCell(MonthCell mMonthCell) {
-                Log.e("date", mMonthCell.getDateString());
+               // Log.e("date", mMonthCell.getDateString());
+                List<CEvent> eventList = mMonthCell.getEvents();
+                if(eventList.size()>0){
+                    for(int i=0;i<eventList.size();i++){
+                       // Log.e("date", eventList.get(i).getTitle());
+
+                    }
+                }
             }
         });
 
