@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/event_calendar.iml" filepath="$PROJECT_DIR$/event_calendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/event_calendar/event_calendar.iml" filepath="$PROJECT_DIR$/event_calendar/event_calendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/event_calendar_test/event_calendar_test.iml" filepath="$PROJECT_DIR$/event_calendar_test/event_calendar_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/event_calendar/library.iml" filepath="$PROJECT_DIR$/event_calendar/library.iml" />
     </modules>
   </component>
 </project>

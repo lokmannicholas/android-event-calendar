@@ -1,1 +1,2 @@
-include ':app'
+include ':event_calendar_test', ':library'
+project(':library').projectDir = new File('event_calendar')
